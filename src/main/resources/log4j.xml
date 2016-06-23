@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <!-- 控制台输出 -->
+  <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+    <!-- 日志格式化 -->
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="[%-5p %d{yyyy-MM-dd HH:mm:ss,SSS}] [THREAD:%t] %c(%L):%m%n"/>
+    </layout>
+  </appender>
+        
+
+  <!-- 文件大小到达指定尺寸的时候产生一个新的文件 -->
+  <appender name="DEBUG_FILE_LOG" class="org.apache.log4j.RollingFileAppender">
+    <param name="append" value="true"/>
+    <param name="encoding" value="UTF-8"/>
+    <param name="file" value="${mvn.log.path}/tc/tc-smart-web-service-debug.log"/>
+    <param name="MaxFileSize" value="100MB"/>
+    <param name="MaxBackupIndex" value="100"/>
+    <!-- 日志格式化 -->
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern"
+             value="[%-5p %d{yyyy-MM-dd HH:mm:ss,SSS}] [THREAD:%t] %c(%L):%m%n"/>
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="${mvn.log.level}"/>
+    </filter>
+  </appender>
+
+  <appender name="ERROR_FILE_LOG" class="org.apache.log4j.RollingFileAppender">
+    <param name="append" value="true"/>
+    <param name="encoding" value="UTF-8"/>
+    <param name="file" value="${mvn.log.path}/tc/tc-smart-web-service-error.log"/>
+    <param name="MaxFileSize" value="100MB"/>
+    <param name="MaxBackupIndex" value="100"/>
+    <!-- 日志格式化 -->
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern"
+             value="[%-5p %d{yyyy-MM-dd HH:mm:ss,SSS}] [THREAD:%t] %c(%L):%m%n"/>
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelRangeFilter">
+      <param name="LevelMin" value="${mvn.log.level}"/>
+    </filter>
+  </appender>
+  
+  
+  <!-- 使用logger，控制到每个包下面的类输入到不同的日志文件中，方便查找bug -->
+  <logger name="java.sql" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+
+  <logger name="org.apache.ibatis" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+
+  <logger name="java.sql.Statement" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+  <logger name="java.sql.PreparedStatement" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+  <logger name="java.sql.ResultSet" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+  <logger name="java.sql.Connection" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/>
+  </logger>
+
+  <!--OFF-->
+  <logger name="org.apache" additivity="false">
+    <level value="OFF"/>
+  </logger>
+
+  <logger name="com.xxoo" additivity="false">
+    <level value="DEBUG"/>
+      <appender-ref ref="ERROR_FILE_LOG"/>
+      <appender-ref ref="DEBUG_FILE_LOG"/>
+      <appender-ref ref="CONSOLE"/>
+  </logger>
+  
+  <logger name="org.springframework.beans" additivity="false">
+      <level value="warn"/>
+      <appender-ref ref="ERROR_FILE_LOG"/>
+      <appender-ref ref="DEBUG_FILE_LOG"/>
+      <appender-ref ref="CONSOLE"/>
+  </logger>
+
+  <root>
+    <level value="${mvn.log.level}"/>
+    <appender-ref ref="ERROR_FILE_LOG"/>
+    <appender-ref ref="DEBUG_FILE_LOG"/>
+    <appender-ref ref="CONSOLE"/>
+  </root>
+</log4j:configuration>
