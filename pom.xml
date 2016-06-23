@@ -73,13 +73,6 @@
 			<version>${spring.version}</version>
 			<optional>true</optional> <!-- 只再当前jar中使用 -->
 		</dependency>
-		<!-- ngc-redis-client -->
-	     <dependency>
-			<groupId>com.ngc</groupId>
-			<artifactId>ngc-redis</artifactId>
-			<version>1.2</version>
-	     </dependency>
-		
 	</dependencies>
 	
 	<build>
