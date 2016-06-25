@@ -36,6 +36,21 @@ public class WeixinConfig {
     public static final String KEY_PATH = null;
     
     /**
+     * 微信红包最小金额1元
+     */
+    public static final int MIN_PRICE = 100; 
+    
+    /**
+     * 微信普通红包最大金额200元
+     */
+    public static final int NORMAL_MAX_PRICE = 20000; 
+   
+    /**
+     * 微信裂变红包最大金额1000元
+     */
+    public static final int FISSION_MAX_PRICE = 100000; 
+    
+    /**
      * 正常微信红包的API地址
      */
     public static final String NORMAL_API_URL = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack";

@@ -1,7 +1,6 @@
 package com.smart.weixinredpack.service;
 
 import com.smart.weixinredpack.domain.request.BaseRedPackRequest;
-import com.smart.weixinredpack.domain.response.WeixinRedPackResponse;
 
 
 /**
@@ -20,7 +19,7 @@ public interface IWeixinSendRedPackService {
 	 * @exception Exception
 	 * @return
 	 */
-	public WeixinRedPackResponse sendRedPack(int redPackType,BaseRedPackRequest baseRedPackRequest) throws Exception;
+	public boolean sendRedPack(int redPackType,BaseRedPackRequest baseRedPackRequest) throws Exception;
 
 
 }
