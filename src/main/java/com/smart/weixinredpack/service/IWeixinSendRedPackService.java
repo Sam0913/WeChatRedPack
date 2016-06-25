@@ -8,7 +8,7 @@ import com.smart.weixinredpack.domain.response.WeixinRedPackResponse;
  * 
  * @Description 微信发送红包接口 
  * @author Sam 
- * @date 2015年7月6日下午7:04:32
+ * @date 2016年6月25日下午5:42:59
  *
  */
 public interface IWeixinSendRedPackService {

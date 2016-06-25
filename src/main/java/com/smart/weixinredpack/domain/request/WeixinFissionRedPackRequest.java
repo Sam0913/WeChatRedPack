@@ -3,7 +3,7 @@ package com.smart.weixinredpack.domain.request;
  * 
  * @Description WeixinFissionRedPackRequest  微信裂变红包的请求对象
  * @author Sam 
- * @date 2016年6月22日下午4:24:42
+ * @date 2016年6月25日下午5:42:59
  *
  */
 public class WeixinFissionRedPackRequest extends BaseRedPackRequest{

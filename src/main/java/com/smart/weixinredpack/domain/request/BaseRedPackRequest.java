@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 
  * @Description 微信红包请求的消息的公用部分
  * @author Sam 
- * @date 2015年7月1日下午5:29:29
+ * @date 2016年6月25日下午5:42:59
  *
  */
 public class BaseRedPackRequest implements Serializable {

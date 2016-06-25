@@ -4,7 +4,7 @@ package com.smart.weixinredpack.domain.enums;
  * 
  * @Description:红包类型
  * @author Sam 
- * @date 2015年7月1日下午10:50:13
+ * @date 2016年6月25日下午5:42:59
  *
  */
 public enum RedPackType {

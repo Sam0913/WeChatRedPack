@@ -8,7 +8,7 @@ import com.smart.weixinredpack.domain.MerchantsGlobalError;
  * 
  * @Description 微信发送红包返回响应
  * @author Sam 
- * @date 2015年7月1日下午6:23:01
+ * @date 2016年6月25日下午5:42:59
  *
  */
 public class WeixinRedPackResponse implements Serializable {

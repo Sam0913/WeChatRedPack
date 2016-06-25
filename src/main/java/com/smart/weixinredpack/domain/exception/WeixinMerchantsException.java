@@ -5,7 +5,7 @@ package com.smart.weixinredpack.domain.exception;
  * 
  * @Description 微信异常处理类
  * @author Sam 
- * @date 2015年7月7日下午7:35:10
+ * @date 2016年6月25日下午5:42:59
  *
  */
 public class WeixinMerchantsException extends RuntimeException {

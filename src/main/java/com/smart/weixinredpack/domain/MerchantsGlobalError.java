@@ -35,5 +35,4 @@ public class MerchantsGlobalError implements Serializable {
         map.put("SEND_FAILED", "红包发放失败,请更换单号再重试");
         map.put("SYSTEMERROR", "系统繁忙，请再试");
     }
-    
 }

@@ -2,9 +2,10 @@ package com.smart.weixinredpack.domain;
 
 
 /**
- * @Description 微信配置类
+ * 
+ * @Description  微信配置类
  * @author Sam 
- * @date 2015年7月1日下午10:55:08
+ * @date 2016年6月25日下午5:42:59
  *
  */
 public class WeixinConfig {
