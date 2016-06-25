@@ -52,5 +52,5 @@ public interface IWeixinSendRedPackService {
 	
 }
 ```
-
-WeChat： ![image](https://github.com/Sam0913/WeChatRedPack/blob/master/sam.jpg)
+WeChat： 
+![image](https://github.com/Sam0913/WeChatRedPack/blob/master/sam.jpg)
