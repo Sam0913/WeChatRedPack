@@ -51,7 +51,7 @@ public class HttpClientUtil {
 		try{
 			//根据传入的类型执行不同的请求类型
 			if(HttpType.https.equals(httpType)){
-				httpClient = new SSLClient().build();
+				httpClient = SSLClient.getInstance();
 			}
 			httpPost = new HttpPost(url);
 			
@@ -113,7 +113,7 @@ public class HttpClientUtil {
 		try{
 			//根据传入的类型执行不同的请求类型
 			if(HttpType.https.equals(httpType)){
-				httpClient = new SSLClient().build();
+				httpClient = SSLClient.getInstance();
 			}
 			
 			httpGet = new HttpGet(url);

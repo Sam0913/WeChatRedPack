@@ -12,6 +12,7 @@ import com.smart.weixinredpack.domain.request.WeixinFissionRedPackRequest;
 import com.smart.weixinredpack.domain.request.WeixinNormalRedPackRequest;
 import com.smart.weixinredpack.domain.response.WeixinRedPackResponse;
 import com.smart.weixinredpack.service.IWeixinSendRedPackService;
+import com.smart.weixinredpack.util.WeixinUtils;
 import com.smart.weixinredpack.util.http.HttpClientUtil;
 
 @Service
@@ -26,16 +27,19 @@ public class WeixinSendRedPackServiceImpl implements IWeixinSendRedPackService {
 		WeixinRedPackResponse response = new WeixinRedPackResponse();
 		boolean isSucces = false; 
 		String url  = "";
+		//生成签名
+		String sign = WeixinUtils.getSign(baseRedPackRequest);
+		baseRedPackRequest.setSign(sign);
 		if(RedPackType.RED_PACK_TYPE_NORMAL.type  ==  redPackType){
 			WeixinNormalRedPackRequest normalRedPackRequest = (WeixinNormalRedPackRequest) baseRedPackRequest;
-			if(normalRedPackRequest.getTotal_amount() < WeixinConfig.NORMAL_MAX_PRICE){
+			if(normalRedPackRequest.getTotal_amount() > WeixinConfig.NORMAL_MAX_PRICE){
 				throw new WeixinMerchantsException("正常类型红包金额最大不能超过200.0元");
 			}
 			url = WeixinConfig.NORMAL_API_URL;
 			response = HttpClientUtil.doPost(url, normalRedPackRequest, WeixinRedPackResponse.class);
 		}else if(RedPackType.RED_PACK_TYPE_FISSION.type == redPackType){
 			WeixinFissionRedPackRequest fissionRedPackRequest = (WeixinFissionRedPackRequest) baseRedPackRequest;
-			if(fissionRedPackRequest.getTotal_amount() < WeixinConfig.FISSION_MAX_PRICE){
+			if(fissionRedPackRequest.getTotal_amount() > WeixinConfig.FISSION_MAX_PRICE){
 				throw new WeixinMerchantsException("裂变类型红包金额最大不能超过200.0元");
 			}
 			url = WeixinConfig.FISSION_API_URL;

@@ -1,17 +1,13 @@
 package com.smart.weixinredpack.util;
 
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Map;
 import java.util.Random;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.codec.digest.DigestUtils;
-
 import com.smart.weixinredpack.domain.WeixinConfig;
-import com.smart.weixinredpack.domain.request.BaseRedPackRequest;
 /**
  * 
  * @Description WeixinUtils
@@ -21,51 +17,20 @@ import com.smart.weixinredpack.domain.request.BaseRedPackRequest;
  */
 public class WeixinUtils {
 
-	
-	/**
-	 * 生成签名
-	 * @param request
-	 * @return
-	 * @throws Exception
-	 */
-    @SuppressWarnings("unchecked")
-	public static String buildRequestSign(BaseRedPackRequest request) throws Exception {
-        try {
-            Map<String, String> sPara = BeanUtils.describe(request);
-            return getWxSign(sPara);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-    
     /**
-     * 生成NonceStr
-     * @return
+     * 签名算法
+     * @param o 要参与签名的数据对象
+     * @return 签名
+     * @throws IllegalAccessException
      */
-    public static String getNonceStr() {
-        Random random = new Random();
-        return MD5Util.MD5Encode(String.valueOf(random.nextInt(10000)), "UTF-8");
-    }
-    
-    /**
-     * 生成mchbillno
-     * @return
-     */
-    public static String getMchBillno(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-    	return WeixinConfig.MCH_ID + sdf.format(new Date()) + RandomCodeUtil.randomInt(10);
-    }
-    
-    /**
-	 * 签名算法
-	 * @param map
-	 * @return
-	 */
-    public static String getWxSign(Map<String,String> map){
+    public static String getSign(Object o) throws IllegalAccessException {
         ArrayList<String> list = new ArrayList<String>();
-        for(Map.Entry<String,String> entry:map.entrySet()){
-            if(entry.getValue()!=""){
-                list.add(entry.getKey() + "=" + entry.getValue() + "&");
+        Class<? extends Object> cls = o.getClass();
+        Field[] fields = cls.getDeclaredFields();
+        for (Field f : fields) {
+            f.setAccessible(true);
+            if (f.get(o) != null && f.get(o) != "") {
+                list.add(f.getName() + "=" + f.get(o) + "&");
             }
         }
         int size = list.size();
@@ -77,8 +42,28 @@ public class WeixinUtils {
         }
         String result = sb.toString();
         result += "key=" + WeixinConfig.KEY;
-        result = DigestUtils.md5Hex(result).toUpperCase();
+        System.out.println("Sign 生成前 MD5:" + result);
+        result = MD5.MD5Encode(result).toUpperCase();
+        System.out.println("Sign 结果:" + result);
         return result;
+    }
+
+    /**
+     * 生成NonceStr
+     * @return
+     */
+    public static String getNonceStr() {
+        Random random = new Random();
+        return MD5.MD5Encode(String.valueOf(random.nextInt(10000)));
+    }
+    
+    /**
+     * 生成mchbillno
+     * @return
+     */
+    public static String getMchBillno(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+    	return WeixinConfig.MCH_ID + sdf.format(new Date()) + RandomCodeUtil.randomInt(10);
     }
     
 }
