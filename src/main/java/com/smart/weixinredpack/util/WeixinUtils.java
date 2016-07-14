@@ -26,7 +26,7 @@ public class WeixinUtils {
     public static String getSign(Object o) throws IllegalAccessException {
         ArrayList<String> list = new ArrayList<String>();
         Class<? extends Object> cls = o.getClass();
-        Field[] fields = cls.getDeclaredFields();
+        Field[] fields = cls.getFields();
         for (Field f : fields) {
             f.setAccessible(true);
             if (f.get(o) != null && f.get(o) != "") {

@@ -6,12 +6,9 @@ package com.smart.weixinredpack.domain.request;
  * @date 2016年6月25日下午5:42:59
  *
  */
+@SuppressWarnings("serial")
 public class WeixinNormalRedPackRequest extends BaseRedPackRequest{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private String client_ip; //调用接口的机器Ip地址
+	public String client_ip; //调用接口的机器Ip地址
 
 	public String getClient_ip() {
 		return client_ip;
