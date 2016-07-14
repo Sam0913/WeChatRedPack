@@ -5,7 +5,7 @@
    	<groupId>com.smart</groupId>
 	<version>1.0</version>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>ngc-weixixredpack</artifactId>
+	<artifactId>smart-weixixredpack</artifactId>
 	<packaging>jar</packaging>
 	<url>http://maven.apache.org</url>
 
