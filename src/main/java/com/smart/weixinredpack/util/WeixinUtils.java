@@ -30,7 +30,11 @@ public class WeixinUtils {
         for (Field f : fields) {
             f.setAccessible(true);
             if (f.get(o) != null && f.get(o) != "") {
-                list.add(f.getName() + "=" + f.get(o) + "&");
+            	if(f.getName().equals("packageStr")){
+                    list.add("package=" + f.get(o) + "&");
+            	}else{
+            		list.add(f.getName() + "=" + f.get(o) + "&");
+            	}
             }
         }
         int size = list.size();
@@ -47,6 +51,10 @@ public class WeixinUtils {
         System.out.println("Sign 结果:" + result);
         return result;
     }
+    
+    public static void main(String[] args) {
+		System.out.println(MD5.MD5Encode("appId=wxd1cb51106e41ec3f&nonceStr=71a8b2ffe0b594a5c1b3c28090384fd7&packageStr=prepay_id=wx20160718132142308ffc9bb40019053467&signType=MD5&timeStamp=1468819299&key=31b38aa0becb5be26bd47137967fcb26").toUpperCase());
+	}
 
     /**
      * 生成NonceStr
